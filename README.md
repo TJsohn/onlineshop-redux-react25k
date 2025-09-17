@@ -1,4 +1,4 @@
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=TJsohn_onlineshop-redux-react25k&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=TJsohn_onlineshop-redux-react25k)
+[![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=TJsohn_onlineshop-redux-react25k)](https://sonarcloud.io/summary/new_code?id=TJsohn_onlineshop-redux-react25k)
 
 # React + Vite
 

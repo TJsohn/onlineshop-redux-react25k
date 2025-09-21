@@ -1,20 +1,21 @@
+import {Routes, Route, BrowserRouter} from "react-router-dom"
 import './App.css'
-import Products from './components/Products'
-// import Users from './components/Users'
 import Cart from './components/Cart'
 import Navbar from './components/Navbar'
-import {Routes, Route} from "react-router-dom"
+import Products from './components/Products'
 
 function App() {
   return (
     <>
+    <BrowserRouter>
       <Navbar />
       <Routes>
         <Route path="/" element={<Products />} />
         <Route path="/cart" element={<Cart />} />
       </Routes>
       {/* <Users /> */}
-    </>
+    </BrowserRouter>
+      </>
   )
 }
 

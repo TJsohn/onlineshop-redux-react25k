@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Martin Holland — Resume (HTML)</title>
+<style>
+  /* ====== Design Tokens ====== */
+  :root{
+    --bg:#fafafa;
+    --text:#2d3748;
+    --muted:#4a5568;
+    --soft:#718096;
+    --rule:#e2e8f0;
+    --card:#ffffff;
+    --accent:#1a365d;
+    --accent-ink:#2c5282;
+    --light-accent:#edf2f7;
+    --border:#cbd5e0;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+
+  /* ====== Base ====== */
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji", sans-serif;
+    line-height:1.7;
+    font-size:16px;
+  }
+
+  .page{
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 48px 32px 80px;
+    background: var(--card);
+    box-shadow: var(--shadow);
+    border-radius: 8px;
+    margin-top: 24px;
+    margin-bottom: 24px;
+  }
+  
+  @media (max-width: 768px) {
+    .page {
+      margin: 0;
+      border-radius: 0;
+      padding: 32px 20px 60px;
+    }
+  }
+
+  /* ====== Header ====== */
+  header{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:32px;
+    padding-bottom:32px;
+    border-bottom:3px solid var(--accent);
+    margin-bottom:40px;
+  }
+  .name{
+    font-size: clamp(32px, 4vw, 42px);
+    letter-spacing: -0.5px;
+    line-height:1.1;
+    margin:0 0 8px 0;
+    font-weight:800;
+    color:var(--accent);
+  }
+  .title{
+    margin: 0 0 12px 0;
+    color: var(--accent-ink);
+    font-weight:600;
+    font-size: 20px;
+    line-height: 1.3;
+  }
+  .loc{
+    margin: 0;
+    color: var(--muted);
+    font-size: 16px;
+    font-weight: 500;
+  }
+  
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-end;
+    font-size: 14px;
+    color: var(--muted);
+  }
+  
+  .contact-info a {
+    color: var(--accent-ink);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  .contact-info a:hover {
+    text-decoration: underline;
+  }
+  
+  @media (max-width: 768px) {
+    header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+    }
+    .contact-info {
+      align-items: flex-start;
+    }
+  }
+
+  /* ====== Layout ====== */
+  .split{
+    display:grid;
+    grid-template-columns: 2.1fr 1fr;
+    gap: 28px;
+  }
+  @media (max-width: 880px){
+    .split{grid-template-columns: 1fr}
+  }
+
+  /* ====== Sections ====== */
+  section{margin: 40px 0}
+  h2{
+    margin: 0 0 16px;
+    padding-top: 4px;
+    font-size: 18px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 700;
+    position: relative;
+  }
+  .rule{
+    height:2px;
+    background: linear-gradient(90deg, var(--accent), var(--light-accent) 70%, transparent);
+    margin: 8px 0 24px;
+    border-radius: 1px;
+  }
+
+  /* ====== Summary Card ====== */
+  .summary{
+    border:1px solid var(--border);
+    background: var(--light-accent);
+    border-radius: 12px;
+    padding: 24px 28px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border-left: 4px solid var(--accent);
+  }
+  .summary p{
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text);
+  }
+
+  /* ====== Experience ====== */
+  .item{
+    border: 1px solid var(--border);
+    background: var(--card);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin: 20px 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    break-inside: avoid;
+    transition: box-shadow 0.2s ease;
+  }
+  .item:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  }
+  .role{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    gap: 20px;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .role h3{
+    margin:0;
+    font-size: 18px;
+    color: var(--accent);
+    line-height: 1.3;
+  }
+  .where{font-weight: 700}
+  .org{font-weight:600; color:var(--muted)}
+  .when{color:var(--soft);font-size:14px;white-space:nowrap;font-weight:500}
+  .place{color:var(--soft);font-size:14px;margin-top:4px}
+  ul{margin: 0 0 0 20px; padding:0}
+  li{
+    margin: 8px 0;
+    line-height: 1.6;
+    color: var(--text);
+  }
+  li::marker{color: var(--accent)}
+  
+  @media (max-width: 768px) {
+    .role {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .when {
+      font-size: 13px;
+    }
+  }
+
+  /* ====== Grids ====== */
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media (max-width: 740px){.grid-2{grid-template-columns:1fr}}
+
+  /* ====== Achievements ====== */
+  .ach{
+    border:1px solid var(--border);
+    border-radius: 12px;
+    padding:20px 24px;
+    background: var(--card);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease;
+  }
+  .ach:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  .ach h4{
+    margin:0 0 12px; 
+    font-size:16px; 
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .ach p {
+    margin: 0;
+    line-height: 1.5;
+    color: var(--text);
+  }
+
+  /* ====== Skills List ====== */
+  .skills-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+    margin-top: 16px;
+  }
+  .skill-item {
+    padding: 8px 16px;
+    background: var(--light-accent);
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--accent-ink);
+    border-left: 3px solid var(--accent);
+  }
+  
+  /* ====== Chips (Legacy) ====== */
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+  .chip{
+    padding:8px 14px;
+    border-radius: 6px;
+    border:1px solid var(--border);
+    background: var(--light-accent);
+    color: var(--accent-ink);
+    font-size:13px;
+    font-weight:500;
+    transition: all 0.2s ease;
+  }
+  .chip:hover {
+    background: var(--accent);
+    color: white;
+  }
+
+  /* ====== Links ====== */
+  a{color:var(--accent);text-decoration: none}
+  a:hover{text-decoration: underline}
+
+  /* ====== Print Styles ====== */
+  @media print{
+    @page{ 
+      size: A4; 
+      margin: 15mm 12mm; 
+    }
+    body{ 
+      -webkit-print-color-adjust: exact; 
+      print-color-adjust: exact;
+      background: white !important;
+    }
+    .page{ 
+      padding: 0 !important;
+      box-shadow: none !important;
+      border-radius: 0 !important;
+      margin: 0 !important;
+      background: white !important;
+      max-width: none !important;
+      width: 100% !important;
+    }
+    header{ 
+      border-bottom: 2px solid var(--accent) !important; 
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      gap: 16px !important;
+    }
+    .split {
+      gap: 20px !important;
+    }
+    .item{ 
+      box-shadow: none !important;
+      border: 1px solid var(--border) !important;
+      margin: 8px 0 !important;
+      padding: 12px 16px !important;
+      break-inside: avoid;
+      border-radius: 8px !important;
+      width: 100% !important;
+      box-sizing: border-box !important;
+    }
+    .item:hover {
+      box-shadow: none !important;
+      transform: none !important;
+    }
+    .ach {
+      padding: 12px 16px !important;
+      margin: 8px 0 !important;
+      box-shadow: none !important;
+    }
+    .ach:hover {
+      transform: none !important;
+      box-shadow: none !important;
+    }
+    .chip {
+      padding: 4px 8px !important;
+      margin: 2px !important;
+    }
+    .chip:hover {
+      background: var(--light-accent) !important;
+      color: var(--accent-ink) !important;
+    }
+    .summary {
+      padding: 16px 20px !important;
+      margin: 12px 0 !important;
+    }
+    ul {
+      margin: 8px 0 0 16px !important;
+    }
+    li {
+      margin: 4px 0 !important;
+      line-height: 1.4 !important;
+    }
+    a{ color: var(--accent-ink) !important; text-decoration: none }
+    .contact-info { display: none !important; }
+    section { 
+      margin: 20px 0 !important; 
+      break-inside: avoid;
+    }
+    h2 { 
+      font-size: 16px !important;
+      margin-bottom: 12px !important;
+    }
+    .role {
+      margin-bottom: 12px !important;
+      padding-bottom: 8px !important;
+    }
+    .role h3 {
+      font-size: 16px !important;
+    }
+    /* Ensure no content goes beyond page margins */
+    * {
+      max-width: 100% !important;
+      box-sizing: border-box !important;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div>
+        <h1 class="name">MARTIN HOLLAND</h1>
+        <p class="title">CTO · AI Integration · Scalable SaaS Solutions</p>
+        <p class="loc">Helsinki, Finland</p>
+      </div>
+      <div class="contact-info">
+        <div>📧 martin.wiggins86@gmail.com</div>
+        <div>📱 +358 453330949</div>
+        <div>💼 <a href="https://www.linkedin.com/in/martin-holland-b5448a141/" target="_blank">LinkedIn</a></div>
+      </div>
+    </header>
+
+    <div class="split">
+      <main>
+        <section>
+          <h2>Summary</h2>
+          <div class="rule"></div>
+          <div class="summary">
+            <p>Dynamic technology leader with over 7 years of experience in full-stack software development and architecture, specializing in JavaScript, TypeScript, and Java Spring Boot ecosystems. Expert in building scalable React applications with Redux state management, coupled with robust backend services using Spring Boot and NestJS. Proficient in modern development practices including microservices architecture, RESTful APIs, and cloud-native solutions. Additional experience with Python and Kotlin from personal projects and hobby development. My key achievements include driving a 20% increase in customer satisfaction through technology innovations and leading a project that generated over €1 million in monthly revenue through full-stack implementations.</p>
+          </div>
+        </section>
+
+        <section>
+          <h2>Core Technologies</h2>
+          <div class="rule"></div>
+          <div class="chips">
+            <span class="chip">JavaScript</span>
+            <span class="chip">TypeScript</span>
+            <span class="chip">React</span>
+            <span class="chip">Redux</span>
+            <span class="chip">Java</span>
+            <span class="chip">Spring Boot</span>
+            <span class="chip">Node.js</span>
+            <span class="chip">NestJS</span>
+            <span class="chip">REST / RESTful</span>
+            <span class="chip">SQL</span>
+            <span class="chip">NoSQL</span>
+            <span class="chip">GCP</span>
+            <span class="chip">Serverless</span>
+            <span class="chip">Git</span>
+            <span class="chip">Agile</span>
+            <span class="chip">Scrum</span>
+            <span class="chip">JIRA</span>
+            <span class="chip">Python</span>
+            <span class="chip">Kotlin</span>
+          </div>
+        </section>
+
+        <section class="key-achievements">
+          <h2>Key Achievements</h2>
+          <div class="rule"></div>
+          <div class="grid-2">
+            <div class="ach">
+              <h4>AI Ecosystem Expansion</h4>
+              <p>Increased user engagement in AI ecosystem by reaching 100 beta testers during product development phase.</p>
+            </div>
+            <div class="ach">
+              <h4>Graph Databases Optimization</h4>
+              <p>Utilized graph databases to streamline processes, achieving a 30% reduction in data retrieval time.</p>
+            </div>
+            <div class="ach">
+              <h4>AI Infrastructure Development</h4>
+              <p>Developed AI infrastructure that enhanced operational efficiency, reducing project completion time by 40%.</p>
+            </div>
+            <div class="ach">
+              <h4>Leadership & Culture</h4>
+              <p>Founded the engineering culture and core tech stack to support rapid, high‑quality delivery.</p>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2>Experience</h2>
+          <div class="rule"></div>
+
+          <div class="item">
+            <div class="role">
+              <h3><span class="where">Head of Technology and AI</span> · <span class="org">Superify</span></h3>
+              <div class="when">03/2025 – Present · Helsinki, Finland</div>
+            </div>
+            <ul>
+              <li>Defining and maintaining the core AI and software architecture, designing scalable systems tailored to our product vision.</li>
+              <li>Building custom AI pipelines and infrastructure to solve domain‑specific challenges where off‑the‑shelf solutions fall short.</li>
+              <li>Founded architecture, culture and tech stack.</li>
+              <li>Driving the technical vision and strategy, aligning innovation with product‑market fit and long‑term business goals.</li>
+              <li>Leading product definition and technical planning, from rapid prototyping to early user feedback integration.</li>
+              <li>Collaborating on go‑to‑market efforts, shaping positioning and messaging with technical insight.</li>
+              <li>Reached 20 beta users in alpha testing, and 100 in beta testing.</li>
+              <li>Owning and established the technology budget, vendor decisions, and infrastructure roadmap to ensure lean, high‑impact operations.</li>
+              <li>Secured deliverables related to investor relations.</li>
+              <li>Helping shape the foundational culture, team structure, and cross‑functional practices as a core member of the leadership team.</li>
+            </ul>
+          </div>
+
+          <div class="item">
+            <div class="role">
+              <h3><span class="where">Full Stack Software Developer</span> · <span class="org">FREE.fi / FreelancePay / Superify</span></h3>
+              <div class="when">01/2021 – Present · Helsinki, Finland</div>
+            </div>
+            <ul>
+              <li>Developed an internal accounting application using React and TypeScript and Java Springboot from the ground up.</li>
+              <li>Integrated existing application logic into a new service, implementing enhanced security practices and conducting thorough code reviews to ensure robust protection.</li>
+              <li>Created NestJS Backend and Java Springboot services for internal integrated automated accounting application.</li>
+              <li>Collaborated with cross‑functional teams to ensure seamless integration and functionality of the new service, enhancing overall business efficiency.</li>
+              <li>Led the implementation of best practices in software development, fostering a culture of continuous improvement and innovation.</li>
+              <li>Clear and comprehensive documentation, facilitating knowledge transfer and ease of understanding for team members.</li>
+              <li>Integrated banking services, enabling automatic payments and seamless invoice‑to‑payment pairing.</li>
+              <li>Implemented taxation reporting integrations, including direct communication with IRS and relevant financial authorities.</li>
+              <li>Built and maintained salary, invoicing, and payment processing logic, ensuring accurate and efficient handling of company financial operations.</li>
+              <li>Integrated AI‑driven chatbot functionality into the customer service pipeline, bridging support operations and enhancing user engagement through conversational interfaces.</li>
+              <li>Designed and integrated a decision‑making AI module that leveraged user data and personal preferences to deliver tailored recommendations and automated actions, enhancing user experience and supporting business decision workflows.</li>
+            </ul>
+          </div>
+
+          <div class="item">
+            <div class="role">
+              <h3><span class="where">Teacher</span> · <span class="org">Helsinki Business College Oy</span></h3>
+              <div class="when">Present · Helsinki, Finland</div>
+            </div>
+
+            <ul>
+              <li>Educated and mentored students at Helsinki Business College Oy, fostering a dynamic and engaging learning environment.</li>
+              <li>Developed and delivered comprehensive lesson plans tailored to diverse student needs and learning styles.</li>
+              <li>Utilized innovative teaching methods to enhance student understanding and retention of business concepts.</li>
+              <li>Assessed student performance through various evaluation techniques, providing constructive feedback to support academic growth.</li>
+              <li>Collaborated with colleagues to design and implement curriculum improvements, ensuring alignment with industry standards.</li>
+              <li>Organized and led extracurricular activities and workshops to enrich the educational experience and promote student engagement.</li>
+              <li>Maintained open communication with students and parents, addressing concerns and facilitating a supportive educational atmosphere.</li>
+              <li>Ensured a high standard of teaching by staying updated with the latest educational trends and business industry developments.</li>
+            </ul>
+          </div>
+
+          <div class="item">
+            <div class="role">
+              <h3><span class="where">Head of Technology</span> · <span class="org">FREE.fi</span></h3>
+              <div class="when">01/2024 – 03/2025 · Helsinki, Finland</div>
+            </div>
+            <ul>
+              <li>Led the development and implementation of technology solutions and architecture at FREE.fi, driving significant business progress and innovation.</li>
+              <li>Managed and led diverse technology teams, optimizing performance and ensuring alignment with organizational goals and objectives.</li>
+              <li>Consulted with third parties over integration goals and expectations.</li>
+              <li>Oversaw budget management, strategically allocating resources to maximize efficiency and impact on business outcomes.</li>
+              <li>Collaborated closely with customer operations, ensuring seamless service delivery and enhancing overall customer experience.</li>
+              <li>Implemented cutting‑edge technologies to improve service quality, resulting in a 20% increase in customer satisfaction.</li>
+              <li>Maintained consistent communication with stakeholders, articulating complex technical concepts in a clear and understandable manner.</li>
+              <li>Ensured consistency and clarity in all technical documentation, avoiding industry‑specific jargon for broader comprehensibility.</li>
+              <li>Diligently proofread all technical reports and communications, ensuring they were error free and professionally presented.</li>
+            </ul>
+          </div>
+
+          <div class="item">
+            <div class="role">
+              <h3><span class="where">Software Development Team Manager</span> · <span class="org">FREE.fi / Barona</span></h3>
+              <div class="when">06/2023 – 01/2024</div>
+            </div>
+            <ul>
+              <li>United a software development team at FREE.fi and within Barona, utilizing scrum and agile methodologies to enhance productivity and coordinated to create a unified team collaboration environment.</li>
+              <li>Reorganized Jira workflows, optimizing project management processes and improving team efficiency.</li>
+              <li>Collaborated with the CTO to develop streamlined processes for software development, resulting in a 20% reduction in project delivery time.</li>
+              <li>Managed and achieved technology integration across two businesses, ensuring a cohesive and aligned tech stack that facilitated knowledge sharing and operational efficiency.</li>
+              <li>Leveraged HR skills to foster a collaborative team environment, enhancing communication and teamwork among developers.</li>
+              <li>Implemented best practices in software development and tracking best practices, leading to a 15% improvement in code quality and system reliability.</li>
+              <li>Maintained consistent and clear communication with stakeholders, ensuring alignment on project goals and deliverables and solved problems.</li>
+            </ul>
+          </div>
+
+          <div class="item">
+            <div class="role">
+              <h3><span class="where">Software Developer Team Lead</span> · <span class="org">FREE.fi</span></h3>
+              <div class="when">01/2022 – 06/2023 · Helsinki, Finland</div>
+            </div>
+            <ul>
+              <li>Directed a team of software developers at FREE.fi, Helsinki, ensuring the successful delivery of high‑quality software projects.</li>
+              <li>Coordinated and managed project timelines, resources, and deliverables to meet client expectations and deadlines.</li>
+              <li>Implemented agile methodologies to enhance team productivity and streamline development processes.</li>
+              <li>Mentored and guided team members, fostering a collaborative and innovative work environment.</li>
+              <li>Directed the design and development of scalable software solutions, improving system performance and user satisfaction.</li>
+              <li>Collaborated with cross‑functional teams to align software development with business objectives and client needs.</li>
+              <li>Conducted code reviews and quality assurance checks to maintain high standards of code quality and functionality.</li>
+              <li>Facilitated effective communication between stakeholders and the development team, ensuring transparency and alignment throughout project lifecycles.</li>
+            </ul>
+          </div>
+
+          <div class="item">
+            <div class="role">
+              <h3><span class="where">Human Resources Manager</span> · <span class="org">PromoTek</span></h3>
+              <div class="when">2019 – 2020 · Helsinki, Finland</div>
+            </div>
+            <ul>
+              <li>Managed recruitment and HR administration for PromoTek, overseeing the end‑to‑end recruitment process and HR operations for a small business.</li>
+              <li>Developed and implemented strategic HR policies and procedures, enhancing employee satisfaction and retention by 20%.</li>
+              <li>Led the recruitment of top talent, successfully filling key positions and contributing to the company's growth and success.</li>
+              <li>Managed onboarding and training programs for new employees, ensuring a smooth transition and rapid integration into the company culture.</li>
+              <li>Provided consultancy‑style HR support to management, offering insights and recommendations relevant to workforce planning and development.</li>
+              <li>Maintained consistent and clear communication with employees, fostering a positive work environment and addressing HR‑related concerns promptly.</li>
+              <li>Ensured all HR documentation and processes were error‑free and compliant with local regulations, maintaining a high standard of professionalism.</li>
+              <li>Utilized HR software to streamline administrative tasks, improving efficiency and reducing processing time by 15%.</li>
+            </ul>
+          </div>
+
+          <div class="item">
+            <div class="role">
+              <h3><span class="where">IT Support Specialist</span> · <span class="org">CrossFit Sörnäinen</span></h3>
+              <div class="when">05/2020 – 02/2021 · Helsinki, Finland</div>
+            </div>
+            <ul>
+              <li>Provided comprehensive IT support, merged cloud‑based services and automated operations to enhance efficiency and streamline processes.</li>
+              <li>Maintained user data with precision, ensuring accuracy for marketing purposes and improving data‑driven decision‑making.</li>
+              <li>Assisted in strategic planning of business operations, optimized the use of current IT systems to boost productivity and operational effectiveness.</li>
+              <li>Collaborated in the strategic planning of new business requirements, aligning IT capabilities with evolving business needs.</li>
+              <li>Implemented solutions that directly contributed to operational improvements, resulting in a 20% increase in system efficiency.</li>
+              <li>Ensured consistency and clarity in all technical communications, avoiding industry jargon to facilitate understanding across departments.</li>
+              <li>Regularly updated and proofread IT documentation to ensure error‑free and professional presentation.</li>
+              <li>Led training sessions for staff on new IT systems and processes, enhancing team competency and confidence in technology use.</li>
+            </ul>
+          </div>
+
+          <div class="item">
+            <div class="role">
+              <h3><span class="where">Checkouts/Services Manager</span> · <span class="org">Morrisons</span></h3>
+              <div class="when">07/2019 – 03/2020 · Lutterworth, UK</div>
+            </div>
+            <ul>
+              <li>Managed daily operations in a front‑end customer‑facing role, serving as the first and last point of contact for customers, ensuring a seamless shopping experience.</li>
+              <li>Strategically scheduled a team of 113 employees to optimize business operations, enhancing efficiency and service delivery.</li>
+              <li>Led the training and development of colleagues and the supervisory team, fostering a culture of continuous improvement and professional growth.</li>
+              <li>Consistently achieved a 1+1 customer service level, ensuring high standards of customer satisfaction and loyalty.</li>
+              <li>Implemented a robust training program for relief colleagues, ensuring adequate coverage and maintaining service quality during peak times.</li>
+              <li>Maintained clear and effective communication with team members, promoting a collaborative and supportive work environment.</li>
+              <li>Ensured consistency in service delivery and operational processes, contributing to a professional and efficient front‑end operation.</li>
+              <li>Diligently proofread all training materials and operational guidelines to ensure accuracy and clarity, supporting effective team performance.</li>
+            </ul>
+          </div>
+
+          <div class="item">
+            <div class="role">
+              <h3><span class="where">Counters Manager</span> · <span class="org">Morrisons</span></h3>
+              <div class="when">04/2018 – 07/2019 · Lutterworth, UK</div>
+            </div>
+            <ul>
+              <li>Managed counters; reduced waste via inventory strategy; sales +15% via placement/promotions.</li>
+            </ul>
+          </div>
+
+          <div class="item">
+            <div class="role">
+              <h3><span class="where">Senior Manager</span> · <span class="org">Morrisons</span></h3>
+              <div class="when">2017 – 04/2018 · Stratford‑upon‑Avon, UK</div>
+            </div>
+            <ul>
+              <li>Duty Manager (team 276); achieved 5/5 Food & H&S; delivered 6–13% YoY growth.</li>
+            </ul>
+          </div>
+
+          <div class="item">
+            <div class="role">
+              <h3><span class="where">Personnel Manager</span> · <span class="org">Morrisons</span></h3>
+              <div class="when">10/2012 – 02/2017 · Banbury, UK</div>
+            </div>
+            <ul>
+              <li>Managed HR initiatives as Store HR Manager/Business Partner, overseeing training, promotions, and disciplinary matters for a workforce of 248 employees.</li>
+              <li>Administered payroll and budgeting processes, ensuring financial accuracy and efficiency in alignment with company objectives.</li>
+              <li>Delivered specialized food safety and induction training, enhancing compliance and operational readiness among colleagues.</li>
+              <li>Achieved a significant increase in colleague engagement, boosting it from 48% to 87% within one year through targeted employee engagement strategies.</li>
+              <li>Conducted duty shifts at the operational level, driving sales and customer service excellence while meeting key performance indicators (KPIs).</li>
+              <li>Collaborated with management to develop and implement HR policies relevant to store operations, fostering a positive work environment.</li>
+              <li>Maintained consistency in communication and documentation, ensuring clarity and professionalism in all HR‑related materials.</li>
+              <li>Vigilantly proofread all HR reports and communications, ensuring they were error‑free and accurately conveyed the intended message.</li>
+            </ul>
+          </div>
+
+          <div class="item">
+            <div class="role">
+              <h3><span class="where">Counters Manager</span> · <span class="org">Morrisons</span></h3>
+              <div class="when">01/2011 – 01/2012 · Helsinki, Finland</div>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="role">
+              <h3><span class="where">Deli Supervisor</span> · <span class="org">Morrisons</span></h3>
+              <div class="when">11/2007 – 01/2011 · Binley, UK</div>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="role">
+              <h3><span class="where">Checkouts Supervisor</span> · <span class="org">Morrisons</span></h3>
+              <div class="when">2005 – 09/2007 · Binley, UK</div>
+            </div>
+            <ul>
+              <li>Improved service efficiency by 15% by supervising checkout operations at Morrisons for 200 customers daily.</li>
+              <li>Managed a team of checkout staff, providing training and support to enhance performance and customer service.</li>
+              <li>Implemented process improvements that reduced checkout wait times by 15%, increasing customer satisfaction.</li>
+              <li>Monitored cash handling procedures to ensure accuracy and compliance with company policies.</li>
+              <li>Resolved customer inquiries and complaints promptly, maintaining a positive shopping experience.</li>
+              <li>Coordinated staff schedules to optimize coverage during peak hours, improving operational efficiency.</li>
+              <li>Conducted regular performance evaluations, providing feedback and coaching to team members.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h2>Projects</h2>
+          <div class="rule"></div>
+
+          <div class="item">
+            <div class="role">
+              <h3><span class="where">LARP Inventory System — Inventory System</span></h3>
+              <div class="when">05/2025 – Present · Helsinki, Finland</div>
+            </div>
+            <ul>
+              <li>Community‑focused inventory management for LARP organisations; target 40% admin time reduction.</li>
+            </ul>
+          </div>
+
+          <div class="item">
+            <div class="role">
+              <h3><span class="where">Freelance Pay — Invoicing Platform</span></h3>
+              <div class="when">2024 – 2025 · Helsinki, Finland</div>
+            </div>
+            <ul>
+              <li>Custom platform for freelancers (sister to Free Laskutus); monthly revenue ~100,000 ISK.</li>
+            </ul>
+          </div>
+
+          <div class="item">
+            <div class="role">
+              <h3><span class="where">Free Laskutus — Invoicing & Banking Integration</span></h3>
+              <div class="when">01/2021 – 03/2025 · Helsinki, Finland</div>
+            </div>
+            <ul>
+              <li>Event‑driven accounting system; platform revenue peak ~€1M/month.</li>
+            </ul>
+          </div>
+
+          <div class="item">
+            <div class="role">
+              <h3><span class="where">Datascan — Hobby Project</span></h3>
+              <div class="when">11/2024 – 12/2024 · Helsinki, Finland</div>
+            </div>
+            <ul>
+              <li>AI‑managed credentials and NL→SQL for querying modern databases with direct results views.</li>
+            </ul>
+          </div>
+
+          <div class="item">
+            <div class="role">
+              <h3><span class="where">Full Stack Starter Project</span></h3>
+              <div class="when">12/2024 – 02/2025 · Helsinki</div>
+            </div>
+            <ul>
+              <li>Improved student onboarding by ~20% via a ready‑to‑run starter kit and docs.</li>
+            </ul>
+          </div>
+
+          <div class="item">
+            <div class="role">
+              <h3><span class="where">ChatApp</span></h3>
+              <div class="when">2022 · Helsinki</div>
+            </div>
+            <ul>
+              <li>Built social chat app with auth, notifications, and strict data segregation.</li>
+            </ul>
+          </div>
+        </section>
+      </main>
+
+      <aside>
+
+        <section>
+          <h2>Languages</h2>
+          <div class="rule"></div>
+          <ul style="margin:8px 0 0 18px">
+            <li>English — Native</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Education</h2>
+          <div class="rule"></div>
+
+          <div class="item">
+            <div class="role">
+              <h3 class="where">BEng — Bachelor of Engineering, Information Technology · Metropolia</h3>
+              <div class="when">Current · Helsinki, Finland</div>
+            </div>
+            <ul>
+              <li>Advanced studies in software engineering, system architecture, and modern development methodologies.</li>
+              <li>Focus on full‑stack development, cloud technologies, and AI integration.</li>
+            </ul>
+          </div>
+
+          <div class="item">
+            <div class="role">
+              <h3 class="where">Vocational Degree, Software Development and IT · Helsinki Business College Oy</h3>
+              <div class="when">08/2021 – 12/2022 · Helsinki, Finland</div>
+            </div>
+            <ul>
+              <li>Comprehensive training in computer software engineering and modern development practices.</li>
+              <li>Specialized in full‑stack web development, database design, and project management.</li>
+            </ul>
+          </div>
+
+          <div class="item">
+            <div class="role">
+              <h3 class="where">Human Resource & Personnel Management Development Programme · Morrisons</h3>
+              <div class="when">2012 · Castle Bromwich, UK</div>
+            </div>
+            <ul>
+              <li>Professional development program focusing on leadership, team management, and organizational development.</li>
+            </ul>
+          </div>
+
+          <div class="item">
+            <div class="role">
+              <h3 class="where">BSc Computer Science · Coventry University</h3>
+              <div class="when">08/2004 – 08/2006 · United Kingdom</div>
+            </div>
+            <ul>
+              <li>Foundation studies in computer science principles, programming fundamentals, and software engineering.</li>
+            </ul>
+          </div>
+        </section>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>

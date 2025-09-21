@@ -1,11 +1,15 @@
+import {Box, Container} from "@mui/material";
 import {Link} from "react-router-dom";
 
-function Navbar() {
+const Navbar = () => {
     return (
-        <nav style={{ padding: "1rem", background: "#eee" }}>
-            <Link to="/" style={{marginRight: "1rem"}}>Home</Link>
+        <Container maxWidth="lg">
+            <Box display="flex" justifyContent="space-between" alignItems="center">
+            <Link to="/">Products</Link>
             <Link to="/cart">Cart</Link>
-        </nav>
+            <h1>Navbar</h1>
+        </Box>
+    </Container>
     )
 }
 
